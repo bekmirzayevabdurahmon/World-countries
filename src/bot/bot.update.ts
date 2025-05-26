@@ -1,4 +1,4 @@
-import { Ctx, On, Start, Update } from "nestjs-telegraf";
+import { Ctx, Help, On, Start, Update } from "nestjs-telegraf";
 import { Context } from "telegraf";
 import * as fs from "node:fs"
 import * as path from "node:path"
@@ -16,6 +16,17 @@ export class BotUpdate {
             {
                 caption: `Assalomu alaykum  👋 \nBotga xush kelibsiz ❗  \nBotdan foydalanish uchun biror davlat nomini yozing 🌍
                 `,
+                reply_markup: {
+                    keyboard: [
+                        [{text: "Davlat qidirish 🗝"}],
+                        [{text: "Bot haqida 🏆"}],
+                        [{
+                            text: "Joylashuv ulash 🧲", 
+                            request_location: true,
+                        }]
+                    ],
+                    resize_keyboard: true,
+                }
             },
         );
     }
@@ -29,8 +40,6 @@ export class BotUpdate {
             const result = await axios(
                 `https://restcountries.com/v3.1/name/${searchText}`
             );
-
-            console.log(result)
            
             const country = result.data[0];
 
